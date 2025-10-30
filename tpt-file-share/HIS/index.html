@@ -21,11 +21,9 @@
             background-position: center;
             color: #333;
             line-height: 1.8;
-            /* 给页面添加轻微遮罩，弱化背景图 */
             position: relative;
         }
         
-        /* 半透明遮罩层，降低背景图干扰 */
         body::before {
             content: "";
             position: fixed;
@@ -33,34 +31,39 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.6); /* 白色半透明遮罩，可调整透明度 */
-            z-index: -1; /* 确保在背景图之上，内容之下 */
+            background-color: rgba(255, 255, 255, 0.6);
+            z-index: -1;
         }
         
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 30px 20px;
-            background-color: rgba(255, 255, 255, 0.98); /* 增强容器背景不透明度 */
+            background-color: rgba(255, 255, 255, 0.98);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
             border-radius: 10px;
             margin-top: 30px;
             margin-bottom: 50px;
-            position: relative; /* 确保内容在遮罩之上 */
+            position: relative;
         }
 
-        /* 头部样式 */
+        /* 头部样式 - 图标居中，右侧图片靠右 */
         header {
-            text-align: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 1px solid #e0e0e0;
+            position: relative; /* 用于右侧图片定位 */
+        }
+        
+        /* 图标居中容器 */
+        .logo-container {
+            text-align: center; /* 图标水平居中 */
+            margin-bottom: 20px;
         }
         
         .logo {
             width: 120px;
             height: 120px;
-            margin: 0 auto 20px;
             border-radius: 50%;
             background-color: #4CAF50;
             display: flex;
@@ -68,6 +71,7 @@
             justify-content: center;
             overflow: hidden;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto; /* 确保图标在容器中居中 */
         }
         
         .logo img {
@@ -76,16 +80,36 @@
             object-fit: contain;
         }
         
+        /* 右侧红框图片 - 靠右对齐 */
+        .header-image {
+            position: absolute; /* 脱离文档流，靠右放置 */
+            top: 30px; /* 与图标顶部对齐 */
+            right: 20px; /* 距离右侧边缘的距离 */
+            width: 200px; /* 图片宽度 */
+            height: 120px; /* 与图标高度一致 */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f8fcf8;
+        }
+        
+        .header-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         h1 {
             color: #2c6e31;
             font-size: 28px;
             margin-bottom: 15px;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8); /* 轻微文字阴影增强可读性 */
+            text-align: center; /* 标题居中 */
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
         }
 
         /* 说明区域 */
         .intro {
-            background-color: rgba(248, 252, 248, 0.95); /* 增强背景不透明度 */
+            background-color: rgba(248, 252, 248, 0.95);
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 30px;
@@ -101,8 +125,8 @@
         
         .intro p {
             margin-bottom: 10px;
-            color: #444; /* 加深文字颜色 */
-            font-size: 16px; /* 略微增大字体 */
+            color: #444;
+            font-size: 16px;
         }
         
         .version-tag {
@@ -177,21 +201,38 @@
             margin-top: 40px;
             padding-top: 20px;
             border-top: 1px solid #e0e0e0;
-            color: #666; /* 加深页脚文字颜色 */
+            color: #666;
             font-size: 14px;
+        }
+
+        /* 响应式调整：小屏幕时右侧图片自动下移，避免遮挡 */
+        @media (max-width: 768px) {
+            .header-image {
+                position: static; /* 取消绝对定位 */
+                margin: 0 auto 20px; /* 图片居中，与图标上下排列 */
+                max-width: 200px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="logo">
-                <!-- 工具图标 -->
-                <img 
-                    src="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/images/%E8%AE%BE%E8%AE%A1%E8%BD%AF%E4%BB%B6%E5%9B%BE%E6%A0%87.png?q-sign-algorithm=sha1&q-ak=AKIDimcVe926nEcowaRLo8uld9HdgBAKayYh88WKIhY_Tu2NSonoCVn3Q4hJ7sIZDRTY&q-sign-time=1761808325;1761811925&q-key-time=1761808325;1761811925&q-header-list=host&q-url-param-list=ci-process&q-signature=4f0b1e8b2122257650a3195d539cd984226101fa&x-cos-security-token=bFh3ZbjZDjvHXK4Wpec0BVMtkwhjTIBa6d7dbab5b48f813294f793fed3dd39feCPMk0BTFGKZuva1gnpuePHvFxx3jl6X0Llu57VRqgAuGKeWgHIEKP1-FSRJG7pDjDhsWt45eSWftlQ4zgtUVnmkQTS44soPWDilEOGjN0oP8emZrj_9c1gDI48PrVgIT_m7FCRLvFepjpUQ6pdMWoH6j3X3jNp-vkIcufSKskJn5qGnDIpcx81jOrNq1rNqtcMG_RxonawYn17QSRrnO2uT4ZjkdFUSgdeADviGN1NgmJFaoJMexUs2xt2yBYCFLOIxAwrgqqB0-sksjar9Dsw&ci-process=originImage" 
-                    alt="通平台数据处理工具图标"
-                >
+            <!-- 头部内容：左侧图标 + 右侧红框图片 -->
+            <div class="header-content">
+                <div class="logo">
+                    <img 
+                        src="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/images/%E8%AE%BE%E8%AE%A1%E8%BD%AF%E4%BB%B6%E5%9B%BE%E6%A0%87.png?q-sign-algorithm=sha1&q-ak=AKIDimcVe926nEcowaRLo8uld9HdgBAKayYh88WKIhY_Tu2NSonoCVn3Q4hJ7sIZDRTY&q-sign-time=1761808325;1761811925&q-key-time=1761808325;1761811925&q-header-list=host&q-url-param-list=ci-process&q-signature=4f0b1e8b2122257650a3195d539cd984226101fa&x-cos-security-token=bFh3ZbjZDjvHXK4Wpec0BVMtkwhjTIBa6d7dbab5b48f813294f793fed3dd39feCPMk0BTFGKZuva1gnpuePHvFxx3jl6X0Llu57VRqgAuGKeWgHIEKP1-FSRJG7pDjDhsWt45eSWftlQ4zgtUVnmkQTS44soPWDilEOGjN0oP8emZrj_9c1gDI48PrVgIT_m7FCRLvFepjpUQ6pdMWoH6j3X3jNp-vkIcufSKskJn5qGnDIpcx81jOrNq1rNqtcMG_RxonawYn17QSRrnO2uT4ZjkdFUSgdeADviGN1NgmJFaoJMexUs2xt2yBYCFLOIxAwrgqqB0-sksjar9Dsw&ci-process=originImage" 
+                        alt="通平台数据处理工具图标"
+                    >
+                </div>
+                
+                <!-- 右侧红框区域的图片（替换为你的截图） -->
+                <div class="header-image">
+                    <img src="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/images/logo.jpg?q-sign-algorithm=sha1&q-ak=AKID8YrAiPHXiQxifKNVgIzgBM-coEOSEU1i57I4dOz-Dny7b2BQaqV4ru8Wi0Er0Hu5&q-sign-time=1761808353;1761811953&q-key-time=1761808353;1761811953&q-header-list=host&q-url-param-list=ci-process&q-signature=e621f059a9dc11c3110523f88808dbb42cc2b81c&x-cos-security-token=bFh3ZbjZDjvHXK4Wpec0BVMtkwhjTIBa8802b776ccef9b9e49df4b5b7916db7cCPMk0BTFGKZuva1gnpuePA8TxrViDKUILvBm-H6r8H6lCSeEu8bHpoBoExtZiW12amm-KHXIcejBuQTyQhOQYMWJonyL5TubraX6G8Ji0lJCLbee-ia4HgV7F5kb3o2yi2xSF-JZTSM3RoxLd3547nwqH3oyER7YXQ14s-u9u61VKx45zyR0OdePR1f2E48yUFm0HTolDDEq_K9yjzo_DD4hA3C8P17okCRVe46pDm6qVRUWYBDRjzC6tkPngz9nNiEA58Ptk5mNUveStKmUbg&ci-process=originImage" alt="logo">
+                </div>
             </div>
+            
             <h1>通平台数据处理工具下载中心</h1>
         </header>
 
