@@ -3,75 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIS版本通平台数据处理工具下载中心</title>
+    <title>通平台数据处理工具下载中心</title>
     <style>
-        /* 基础样式美化 */
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: "Microsoft YaHei", sans-serif;
-            max-width: 800px;
+            font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+            background-color: #f0f7f0;
+            background-image: url("https://picsum.photos/id/180/1200/800");
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #333;
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 30px 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* 头部样式 */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .logo img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
         }
         h1 {
-            color: #333;
-            border-bottom: 2px solid #4CAF50;
-            padding-bottom: 10px;
+            color: #2c6e31;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        /* 说明区域 */
+        .intro {
+            background-color: #f8fcf8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #4CAF50;
+        }
+        .intro h2 {
+            color: #388e3c;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .intro p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .version-tag {
+            display: inline-block;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+
+        /* 下载列表 */
+        .download-list {
+            display: grid;
+            gap: 20px;
         }
         .file-item {
-            background: #f9f9f9;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border-left: 4px solid #4CAF50;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid #4CAF50;
+        }
+        .file-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         .file-name {
             font-weight: bold;
+            font-size: 18px;
             color: #2c3e50;
+            margin-bottom: 8px;
         }
         .file-desc {
             color: #666;
-            margin: 5px 0;
+            margin-bottom: 15px;
+            font-size: 15px;
         }
         .download-btn {
-            display: inline-block;
-            padding: 8px 15px;
-            background: #4CAF50;
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #4CAF50;
             color: white;
             text-decoration: none;
-            border-radius: 3px;
-            margin-top: 5px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
         }
         .download-btn:hover {
-            background: #45a049;
+            background-color: #3d9140;
+        }
+        .download-btn svg {
+            margin-right: 8px;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #888;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <h1>资源下载中心</h1>
-    <p>欢迎下载HIS版通平台数据处理工具</p>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- 工具图标（使用通用数据处理图标） -->
+                <img src="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/images/%E8%AE%BE%E8%AE%A1%E8%BD%AF%E4%BB%B6%E5%9B%BE%E6%A0%87.png?q-sign-algorithm=sha1&q-ak=AKIDlfp68kxgLyHU1Wy4rFK7Uqw2zzxYamdjy_LCwuL6RzzknRQHKQukM1YuwzVdKWwB&q-sign-time=1761796096;1761799696&q-key-time=1761796096;1761799696&q-header-list=host&q-url-param-list=ci-process&q-signature=503dc4ac06a3f0b0c1db68266e2e47cf7610f43a&x-cos-security-token=KalnD8emfjis4nN24rDcVxU3H0Q050Cadb8397958ca2735a120b9b0afe5126639xOTjb1eWuFj--1Y0qquQs8Mp3nmEihNt8txDhwc2pKgwKgj6s_VoQNhDHAvXNZtlQt9CL_kdGNJQk1Q8I6fWiHh8052PXU8gQE0VbR3VbBWNxp5Lv9xV2FyKNMR89PDclL_S0eG8duytBcFEDxZqcaxxv2npyLaaTC-t6KZQVcmceTIh8yxivb-809NBPn16ynJgo9R1ezRwpzM4aN1Fg-8ldflOZmazO8wjxXfPYGV7zEKfwFEbbIA30etzUuB7O5noRn5B5dKwxcuGcr2kA&ci-process=originImage" alt="通平台数据处理工具图标">
+            </div>
+            <h1>通平台数据处理工具下载中心</h1>
+        </header>
 
-    <!-- 第一个文件 -->
-    <div class="file-item">
-        <div class="file-name">通平台数据处理工具_中联软件.exe</div>
-        <div class="file-desc">中联软件版本</div>
-        <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%AD%E8%81%94%E8%BD%AF%E4%BB%B6.exe" download>中联软件版</a>
+        <section class="intro">
+            <h2>工具说明</h2>
+            <p>通平台数据处理工具是一款高效的医疗数据处理软件，当前已支持美康版本和HIS版本，可适配主流医疗信息系统。</p>
+            <p>工具功能：传入标准格式的Excel数据后，可自动生成包含医院药品信息、药品使用明细、科室基础信息及药费统计（含人次分析）的标准化目标表格，大幅减少人工处理时间。</p>
+            <p>兼容性：完美支持通平台1.4版本和1.5版本，适配中联、东华、东软等主流HIS系统环境。</p>
+            <div>
+                <span class="version-tag">支持Excel 2007+</span>
+                <span class="version-tag">Windows 7/10/11</span>
+                <span class="version-tag">定期更新维护</span>
+            </div>
+        </section>
+
+        <section class="download-list">
+            <!-- 第一个文件 -->
+            <div class="file-item">
+                <div class="file-name">通平台数据处理工具_中联软件.exe</div>
+                <div class="file-desc">适配中联HIS系统，支持药品数据全量解析与统计</div>
+                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%AD%E8%81%94%E8%BD%AF%E4%BB%B6.exe" class="download-btn" download>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    下载中联软件版
+                </a>
+            </div>
+
+            <!-- 第二个文件 -->
+            <div class="file-item">
+                <div class="file-name">通平台数据处理工具_东华.exe</div>
+                <div class="file-desc">适配东华HIS系统，优化科室数据关联算法</div>
+                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%9C%E5%8D%8E.exe" class="download-btn" download>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    下载东华软件版
+                </a>
+            </div>
+
+            <!-- 第三个文件 -->
+            <div class="file-item">
+                <div class="file-name">通平台数据处理工具_东软.exe</div>
+                <div class="file-desc">适配东软HIS系统，增强药费统计准确性</div>
+                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%9C%E8%BD%AF.exe" class="download-btn" download>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    下载东软软件版
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 通平台数据处理工具 | 定期更新，建议使用最新版本</p>
+        </footer>
     </div>
-
-    <!-- 第二个文件 -->
-    <div class="file-item">
-        <div class="file-name">通平台数据处理工具_东华.exe</div>
-        <div class="file-desc">东华系统版本</div>
-        <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%9C%E5%8D%8E.exe" download>东华软件版</a>
-    </div>
-
-    <!-- 第三个文件 -->
-    <div class="file-item">
-        <div class="file-name">通平台数据处理工具_东软.exe</div>
-        <div class="file-desc">东软系统版本</div>
-        <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%9C%E8%BD%AF.exe" download>东软软件版</a>
-    </div>
-
-    <!-- 如需添加更多文件，复制上面的 .file-item 块并修改内容即可 -->
 </body>
 </html>
