@@ -11,6 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
             font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
             background-color: #f0f7f0;
@@ -20,16 +21,32 @@
             background-position: center;
             color: #333;
             line-height: 1.8;
+            /* 给页面添加轻微遮罩，弱化背景图 */
+            position: relative;
         }
+        
+        /* 半透明遮罩层，降低背景图干扰 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.6); /* 白色半透明遮罩，可调整透明度 */
+            z-index: -1; /* 确保在背景图之上，内容之下 */
+        }
+        
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 30px 20px;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.98); /* 增强容器背景不透明度 */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
             border-radius: 10px;
             margin-top: 30px;
             margin-bottom: 50px;
+            position: relative; /* 确保内容在遮罩之上 */
         }
 
         /* 头部样式 */
@@ -39,6 +56,7 @@
             padding-bottom: 20px;
             border-bottom: 1px solid #e0e0e0;
         }
+        
         .logo {
             width: 120px;
             height: 120px;
@@ -49,35 +67,44 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
+        
         .logo img {
             width: 80px;
             height: 80px;
             object-fit: contain;
         }
+        
         h1 {
             color: #2c6e31;
             font-size: 28px;
             margin-bottom: 15px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8); /* 轻微文字阴影增强可读性 */
         }
 
         /* 说明区域 */
         .intro {
-            background-color: #f8fcf8;
+            background-color: rgba(248, 252, 248, 0.95); /* 增强背景不透明度 */
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 30px;
             border-left: 4px solid #4CAF50;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
+        
         .intro h2 {
             color: #388e3c;
             margin-bottom: 10px;
             font-size: 20px;
         }
+        
         .intro p {
             margin-bottom: 10px;
-            color: #555;
+            color: #444; /* 加深文字颜色 */
+            font-size: 16px; /* 略微增大字体 */
         }
+        
         .version-tag {
             display: inline-block;
             background-color: #e8f5e9;
@@ -94,29 +121,34 @@
             display: grid;
             gap: 20px;
         }
+        
         .file-item {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s, box-shadow 0.3s;
             border-top: 3px solid #4CAF50;
         }
+        
         .file-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
         }
+        
         .file-name {
             font-weight: bold;
             font-size: 18px;
             color: #2c3e50;
             margin-bottom: 8px;
         }
+        
         .file-desc {
-            color: #666;
+            color: #555;
             margin-bottom: 15px;
             font-size: 15px;
         }
+        
         .download-btn {
             display: inline-flex;
             align-items: center;
@@ -126,11 +158,15 @@
             text-decoration: none;
             border-radius: 5px;
             font-weight: 500;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        
         .download-btn:hover {
             background-color: #3d9140;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
+        
         .download-btn svg {
             margin-right: 8px;
         }
@@ -141,7 +177,7 @@
             margin-top: 40px;
             padding-top: 20px;
             border-top: 1px solid #e0e0e0;
-            color: #888;
+            color: #666; /* 加深页脚文字颜色 */
             font-size: 14px;
         }
     </style>
@@ -150,8 +186,11 @@
     <div class="container">
         <header>
             <div class="logo">
-                <!-- 工具图标（使用通用数据处理图标） -->
-                <img src="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/images/%E8%AE%BE%E8%AE%A1%E8%BD%AF%E4%BB%B6%E5%9B%BE%E6%A0%87.png?q-sign-algorithm=sha1&q-ak=AKIDimcVe926nEcowaRLo8uld9HdgBAKayYh88WKIhY_Tu2NSonoCVn3Q4hJ7sIZDRTY&q-sign-time=1761808325;1761811925&q-key-time=1761808325;1761811925&q-header-list=host&q-url-param-list=ci-process&q-signature=4f0b1e8b2122257650a3195d539cd984226101fa&x-cos-security-token=bFh3ZbjZDjvHXK4Wpec0BVMtkwhjTIBa6d7dbab5b48f813294f793fed3dd39feCPMk0BTFGKZuva1gnpuePHvFxx3jl6X0Llu57VRqgAuGKeWgHIEKP1-FSRJG7pDjDhsWt45eSWftlQ4zgtUVnmkQTS44soPWDilEOGjN0oP8emZrj_9c1gDI48PrVgIT_m7FCRLvFepjpUQ6pdMWoH6j3X3jNp-vkIcufSKskJn5qGnDIpcx81jOrNq1rNqtcMG_RxonawYn17QSRrnO2uT4ZjkdFUSgdeADviGN1NgmJFaoJMexUs2xt2yBYCFLOIxAwrgqqB0-sksjar9Dsw&ci-process=originImage" alt="通平台数据处理工具图标">
+                <!-- 工具图标 -->
+                <img 
+                    src="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/images/%E8%AE%BE%E8%AE%A1%E8%BD%AF%E4%BB%B6%E5%9B%BE%E6%A0%87.png?q-sign-algorithm=sha1&q-ak=AKIDimcVe926nEcowaRLo8uld9HdgBAKayYh88WKIhY_Tu2NSonoCVn3Q4hJ7sIZDRTY&q-sign-time=1761808325;1761811925&q-key-time=1761808325;1761811925&q-header-list=host&q-url-param-list=ci-process&q-signature=4f0b1e8b2122257650a3195d539cd984226101fa&x-cos-security-token=bFh3ZbjZDjvHXK4Wpec0BVMtkwhjTIBa6d7dbab5b48f813294f793fed3dd39feCPMk0BTFGKZuva1gnpuePHvFxx3jl6X0Llu57VRqgAuGKeWgHIEKP1-FSRJG7pDjDhsWt45eSWftlQ4zgtUVnmkQTS44soPWDilEOGjN0oP8emZrj_9c1gDI48PrVgIT_m7FCRLvFepjpUQ6pdMWoH6j3X3jNp-vkIcufSKskJn5qGnDIpcx81jOrNq1rNqtcMG_RxonawYn17QSRrnO2uT4ZjkdFUSgdeADviGN1NgmJFaoJMexUs2xt2yBYCFLOIxAwrgqqB0-sksjar9Dsw&ci-process=originImage" 
+                    alt="通平台数据处理工具图标"
+                >
             </div>
             <h1>通平台数据处理工具下载中心</h1>
         </header>
@@ -173,7 +212,11 @@
             <div class="file-item">
                 <div class="file-name">通平台数据处理工具_中联软件.exe</div>
                 <div class="file-desc">适配中联HIS系统，支持药品数据全量解析与统计</div>
-                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%AD%E8%81%94%E8%BD%AF%E4%BB%B6.exe" class="download-btn" download>
+                <a 
+                    href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%AD%E8%81%94%E8%BD%AF%E4%BB%B6.exe" 
+                    class="download-btn" 
+                    download
+                >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -187,7 +230,11 @@
             <div class="file-item">
                 <div class="file-name">通平台数据处理工具_东华.exe</div>
                 <div class="file-desc">适配东华HIS系统，优化科室数据关联算法</div>
-                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%9C%E5%8D%8E.exe" class="download-btn" download>
+                <a 
+                    href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%9C%E5%8D%8E.exe" 
+                    class="download-btn" 
+                    download
+                >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -201,7 +248,11 @@
             <div class="file-item">
                 <div class="file-name">通平台数据处理工具_东软.exe</div>
                 <div class="file-desc">适配东软HIS系统，增强药费统计准确性</div>
-                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%9C%E8%BD%AF.exe" class="download-btn" download>
+                <a 
+                    href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/%E9%80%9A%E5%B9%B3%E5%8F%B0%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7_%E4%B8%9C%E8%BD%AF.exe" 
+                    class="download-btn" 
+                    download
+                >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -210,11 +261,16 @@
                     下载东软软件版
                 </a>
             </div>
+
             <!-- 第四个文件 -->
             <div class="file-item">
                 <div class="file-name">通平台数据处理工具_美康.exe</div>
                 <div class="file-desc">美康通用版本</div>
-                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/通平台数据处理工具_美康.exe" class="download-btn" download>
+                <a 
+                    href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/通平台数据处理工具_美康.exe" 
+                    class="download-btn" 
+                    download
+                >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -223,11 +279,16 @@
                     下载美康通用版
                 </a>
             </div>
+
             <!-- 第五个文件 -->
             <div class="file-item">
                 <div class="file-name">通平台数据处理工具_陈莹.exe</div>
                 <div class="file-desc">美康-陈莹版本</div>
-                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/新医疗数据处理工具_陈莹.exe" class="download-btn" download>
+                <a 
+                    href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/新医疗数据处理工具_陈莹.exe" 
+                    class="download-btn" 
+                    download
+                >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -236,11 +297,16 @@
                     下载美康-陈莹版本
                 </a>
             </div>
+
             <!-- 第六个文件 -->
             <div class="file-item">
                 <div class="file-name">通平台数据处理工具_沙其.exe</div>
                 <div class="file-desc">美康-沙其版本</div>
-                <a href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/通平台数据处理工具_沙其.exe" class="download-btn" download>
+                <a 
+                    href="https://tpt-data-tool-1384577885.cos.ap-beijing.myqcloud.com/downloads/通平台数据处理工具_沙其.exe" 
+                    class="download-btn" 
+                    download
+                >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
