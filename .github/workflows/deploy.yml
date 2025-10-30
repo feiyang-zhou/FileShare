@@ -16,6 +16,6 @@ jobs:
           SECRET_KEY: ${{ secrets.TENCENT_CLOUD_SECRET_KEY }}
           BUCKET: ${{ secrets.COS_BUCKET }}
           REGION: ${{ secrets.COS_REGION }}
-        run: coscmd config -a  -s  -b  -r 
+        run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION 
       - name: 同步文件到 COS
         run: coscmd upload -r ./tpt-file-share/HIS/ / --delete
