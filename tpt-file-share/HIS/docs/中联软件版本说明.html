@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中联软件版本医疗数据处理工具说明文档</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #27ae60;
+            padding-left: 15px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        h4 {
+            color: #34495e;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            overflow-x: auto;
+            font-size: 14px;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s ease;
+            border-top: 4px solid #27ae60;
+        }
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .feature-card h4 {
+            color: #495057;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+            padding: 15px 15px 15px 50px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #27ae60;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #27ae60;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f0f8ff;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .info {
+            background-color: #e8f5e8;
+            border: 1px solid #27ae60;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .special-feature {
+            background-color: #e8f5e8;
+            border: 2px solid #27ae60;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .special-feature h3 {
+            color: #27ae60;
+            margin-top: 0;
+        }
+        .version-info {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .version-info h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .toc {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .toc ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        .toc a {
+            color: #27ae60;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .format-example {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .format-example h4 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        .architecture-diagram {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+        @media (max-width: 768px) {
+            .toc ul {
+                columns: 1;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="emoji">📋</span>中联软件版本医疗数据处理工具说明文档</h1>
+
+
+        <div class="toc">
+            <h3>📋 目录导航</h3>
+            <ul>
+                <li><a href="#overview">软件概述</a></li>
+                <li><a href="#features">核心功能特点</a></li>
+                <li><a href="#requirements">数据要求</a></li>
+                <li><a href="#department-structure">科室结构识别</a></li>
+                <li><a href="#output">输出格式</a></li>
+                <li><a href="#processing">特殊处理机制</a></li>
+                <li><a href="#usage">使用步骤</a></li>
+                <li><a href="#notes">注意事项</a></li>
+                <li><a href="#version-features">版本特性</a></li>
+                <li><a href="#workflow">数据处理流程</a></li>
+            </ul>
+        </div>
+
+        <div id="overview">
+            <h2><span class="emoji">📋</span>软件概述</h2>
+            <p>中联软件数据处理工具是基于通平台数据处理工具开发的专业医疗数据标准化处理系统，专门适配中联软件的数据格式和业务需求。该工具能够将中联软件导出的医疗相关Excel文件转换为标准化的目标表格，支持复杂的科室结构识别和医保编码匹配。</p>
+        </div>
+
+        <div id="features">
+            <h2><span class="emoji">🔧</span>核心功能特点</h2>
+            
+            <h3>1. 数据处理能力</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>医疗数据标准化处理</h4>
+                    <p>将中联软件导出的多个医疗相关Excel文件转换为标准化的目标表格</p>
+                </div>
+                <div class="feature-card">
+                    <h4>四工作表输出</h4>
+                    <p>生成包含4个工作表的Excel文件：医院药品信息表、药品使用信息表、科室信息表（支持四级结构）、药费及人次汇总表</p>
+                </div>
+            </div>
+
+            <h3>2. 中联软件特色功能</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>智能数据聚合处理</h4>
+                    <p>自动对药品使用明细数据按科室+药品名称进行聚类</p>
+                </div>
+                <div class="feature-card">
+                    <h4>动态科室结构识别</h4>
+                    <p>支持四级科室结构的智能识别和分类</p>
+                </div>
+                <div class="feature-card">
+                    <h4>科室结构总表维护</h4>
+                    <p>自动维护桌面科室结构总表，确保科室ID一致性</p>
+                </div>
+                <div class="feature-card">
+                    <h4>智能医保编码匹配</h4>
+                    <p>通过多种算法精确匹配医保编码</p>
+                </div>
+                <div class="feature-card">
+                    <h4>前导零格式保护</h4>
+                    <p>确保科室ID保持正确格式（如029000而非29000.0）</p>
+                </div>
+            </div>
+
+            <h3>3. 用户界面特性</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>图形化界面</h4>
+                    <p>友好GUI界面，集成Logo显示</p>
+                </div>
+                <div class="feature-card">
+                    <h4>实时日志显示</h4>
+                    <p>处理过程实时显示详细日志</p>
+                </div>
+                <div class="feature-card">
+                    <h4>进度条显示</h4>
+                    <p>可视化处理进度</p>
+                </div>
+                <div class="feature-card">
+                    <h4>文件自动检测</h4>
+                    <p>智能查找和识别数据文件</p>
+                </div>
+                <div class="feature-card">
+                    <h4>版本选择支持</h4>
+                    <p>支持通平台1.4和1.5版本切换</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="requirements">
+            <h2><span class="emoji">📁</span>中联软件数据要求</h2>
+            
+            <h3>必需文件（2个）</h3>
+
+            <h4>1. 药品使用信息文件</h4>
+            <div class="format-example">
+                <p><strong>格式</strong>：Excel文件（.xlsx/.xls）</p>
+                <p><strong>数据来源</strong>：中联软件药品使用模块导出的原始明细数据</p>
+                <p><strong>数据特征</strong>：</p>
+                <ul>
+                    <li>支持智能表头检测）/li>
+                    <li>包含所有科室（门诊+住院）的药品使用明细数据</li>
+                    <li>系统会自动按科室+药品名称进行聚合处理</li>
+                </ul>
+            </div>
+
+            <div class="special-feature">
+                <h4>必须包含的列（不支持智能匹配）</h4>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>标准列名</th>
+                                <th>是否严格匹配列名名称</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>接收科室</td>
+                                <td>是</td>
+                                <td>开药科室名称</td>
+                            </tr>
+                            <tr>
+                                <td>姓名</td>
+                                <td>是</td>
+                                <td>患者姓名</td>
+                            </tr>
+                            <tr>
+                                <td>住院次数</td>
+                                <td>是</td>
+                                <td>住院次数</td>
+                            </tr>
+                            <tr>
+                                <td>药品名称</td>
+                                <td>是</td>
+                                <td>药品完整名称</td>
+                            </tr>
+                            <tr>
+                                <td>实发数量</td>
+                                <td>是</td>
+                                <td>药品实际发放数量（支持聚合求和）</td>
+                            </tr>
+                            <tr>
+                                <td>金额</td>
+                                <td>是</td>
+                                <td>药品使用金额（支持聚合求和）</td>
+                            </tr>
+                            <tr>
+                                <td>药品id</td>
+                                <td>是</td>
+                                <td>药品唯一标识码</td>
+                            </tr>
+                            <tr>
+                                <td>规格</td>
+                                <td>是</td>
+                                <td>药品规格</td>
+                            </tr>
+                            <tr>
+                                <td>产地</td>
+                                <td>是</td>
+                                <td>生产厂家信息</td>
+                            </tr>
+                            <tr>
+                                <td>单价</td>
+                                <td>是</td>
+                                <td>药品单价</td>
+                            </tr>
+                            <tr>
+                                <td>单位</td>
+                                <td>是</td>
+                                <td>计价单位</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h4>2. 医保编码对应关系</h4>
+            <div class="format-example">
+                <p><strong>格式</strong>：Excel文件</p>
+                <p><strong>数据来源</strong>：医院提供</p>
+                <p><strong>用途</strong>：医保编码映射和药品信息匹配</p>
+            </div>
+                        <div class="special-feature">
+                <h4>必须包含的列（支持智能匹配）</h4>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>标准列名</th>
+                                <th>是否严格匹配列名名称</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>医保代码</td>
+                                <td>否</td>
+                                <td>医保编码</td>
+                            </tr>
+                            <tr>
+                                <td>医院药品ID</td>
+                                <td>否</td>
+                                <td>医院药品ID</td>
+                            </tr>
+                            <tr>
+                                <td>规格转换系数</td>
+                                <td>否</td>
+                                <td>规格转换系数</td>
+                            </tr>
+                            <tr>
+                                <td>药品名称</td>
+                                <td>否</td>
+                                <td>药品完整名称</td>
+                            </tr>
+                            <tr>
+                                <td>规格或规格×包装</td>
+                                <td>否</td>
+                                <td>规格或规格×包装</td>
+                            </tr>
+                            <tr>
+                                <td>成本价格(元)</td>
+                                <td>否</td>
+                                <td>成本价格(元)</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h3>可选文件（1个）</h3>
+            <div class="info">
+                <h4>科室结构总表</h4>
+                <p>自定义科室结构，不选择时使用桌面默认表</p>
+            </div>
+        </div>
+
+        <div id="department-structure">
+            <h2><span class="emoji">🏥</span>中联软件科室结构识别</h2>
+            
+            <h3>四级结构识别系统</h3>
+            <p>系统采用先进的正则表达式和模式匹配算法，能够智能识别中联软件中复杂的科室层级结构：</p>
+
+            <h4>1. 四级结构识别模式</h4>
+            <div class="code-block"># 模式1：科室名+数字+后缀
+(.+?)(一|二|三|四|五|六|七|八|九|十|1|2|3|4|5|6|7|8|9|10|11|12)(病房|区|科|病区|诊室|监护室|重症|ICU|室|疗区)$
+
+# 模式2：科室名+数字（纯数字结尾）
+(.+?)(一|二|三|四|五|六|七|八|九|十|1|2|3|4|5|6|7|8|9|10|11|12)科?$
+
+# 模式3：科室名+英文字母+后缀
+(.+?)([a-zA-Z])(病房|区|科|病区|诊室|监护室|重症|ICU|室|疗区|组)$
+
+# 模式4：科室名+英文字母（纯字母结尾）
+(.+?)([a-zA-Z])$
+
+# 模式5：科室名+数字+字母
+(.+?)(一|二|三|四|五|六|七|八|九|十|1|2|3|4|5|6|7|8|9|10|11|12)([A-Z])$</div>
+
+            <h4>2. 中联软件科室识别示例</h4>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>心内科一病房</h4>
+                    <p>基础科室：心内科<br>子单元：一病房<br>类型：住院</p>
+                </div>
+                <div class="feature-card">
+                    <h4>外科二区</h4>
+                    <p>基础科室：外科<br>子单元：二区<br>类型：住院</p>
+                </div>
+                <div class="feature-card">
+                    <h4>儿科1科</h4>
+                    <p>基础科室：儿科<br>子单元：1科<br>类型：住院</p>
+                </div>
+                <div class="feature-card">
+                    <h4>妇科A组门诊</h4>
+                    <p>基础科室：妇科<br>子单元：A组<br>类型：门诊</p>
+                </div>
+                <div class="feature-card">
+                    <h4>肾内科a区</h4>
+                    <p>基础科室：肾内科<br>子单元：a区<br>类型：住院</p>
+                </div>
+            </div>
+
+            <h3>科室ID分配规则</h3>
+            <ul>
+                <li><strong>一级结构</strong>：全院合计 (ID: 01)</li>
+                <li><strong>二级结构</strong>：基础科室或科室组 (ID: 001, 002, ...)</li>
+                <li><strong>三级结构</strong>：具体科室类型 (ID: 0010, 0011, ...)</li>
+                <li><strong>四级结构</strong>：科室子单元 (ID: 00101, 00102, ...)</li>
+            </ul>
+
+            <h3>科室分组逻辑</h3>
+            <div class="special-feature">
+                <ul>
+                    <li><strong>混合科室</strong>：同时有门诊和住院的基础科室保持独立二级结构</li>
+                    <li><strong>其他门诊</strong>：仅有门诊的科室归入"其他门诊"二级结构</li>
+                    <li><strong>其他住院</strong>：仅有住院的科室归入"其他住院"二级结构</li>
+                    <li><strong>其他病房</strong>：仅有四级结构住院科室的基础科室归入"其他病房"二级结构</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="output">
+            <h2><span class="emoji">🎯</span>输出格式</h2>
+            
+            <h3>输出文件结构</h3>
+            <div class="info">
+                <ul>
+                    <li><strong>文件格式</strong>：Excel文件（.xlsx）</li>
+                    <li><strong>工作表数量</strong>：4个</li>
+                    <li><strong>默认保存位置</strong>：输入数据文件所在目录</li>
+                    <li><strong>文件命名</strong>：目标表格_时间戳.xlsx</li>
+                </ul>
+            </div>
+
+            <h3>各工作表内容</h3>
+
+            <h4>1. 医院药品信息表</h4>
+            <div class="format-example">
+                <p><strong>数据来源</strong>：中联软件药品目录 + 药品使用信息匹配</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>列</th>
+                                <th>内容</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A列</td>
+                                <td>医保编码</td>
+                                <td>国家医保编码</td>
+                            </tr>
+                            <tr>
+                                <td>B列</td>
+                                <td>医院药品ID</td>
+                                <td>院内药品唯一码</td>
+                            </tr>
+                            <tr>
+                                <td>C列</td>
+                                <td>规格转换系数</td>
+                                <td>默认为1</td>
+                            </tr>
+                            <tr>
+                                <td>D列</td>
+                                <td>药品名称</td>
+                                <td>产品名称</td>
+                            </tr>
+                            <tr>
+                                <td>E列</td>
+                                <td>规格或规格x包装</td>
+                                <td>制剂规格</td>
+                            </tr>
+                            <tr>
+                                <td>F列</td>
+                                <td>成本价格(元)</td>
+                                <td>药品成本价格</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h4>2. 药品使用信息表</h4>
+            <div class="format-example">
+                <p><strong>数据来源</strong>：聚合处理后的药品使用信息 + 医保编码匹配</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>列</th>
+                                <th>内容</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A列</td>
+                                <td>医保编码</td>
+                                <td>国家医保编码</td>
+                            </tr>
+                            <tr>
+                                <td>B列</td>
+                                <td>医院药品ID</td>
+                                <td>院内药品唯一码</td>
+                            </tr>
+                            <tr>
+                                <td>C列</td>
+                                <td>科室ID</td>
+                                <td>四级科室ID</td>
+                            </tr>
+                            <tr>
+                                <td>D列</td>
+                                <td>门诊住院</td>
+                                <td>科室类型</td>
+                            </tr>
+                            <tr>
+                                <td>E列</td>
+                                <td>院区名</td>
+                                <td>院区信息</td>
+                            </tr>
+                            <tr>
+                                <td>F列</td>
+                                <td>时间</td>
+                                <td>数据时间</td>
+                            </tr>
+                            <tr>
+                                <td>G列</td>
+                                <td>使用量</td>
+                                <td>聚合后的实发数量</td>
+                            </tr>
+                            <tr>
+                                <td>H列</td>
+                                <td>使用金额</td>
+                                <td>聚合后的金额</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h4>3. 科室信息表</h4>
+            <div class="special-feature">
+                <p><strong>数据来源</strong>：科室结构识别 + 科室结构总表维护</p>
+                <p><strong>列结构</strong>：四级科室层级结构（包含单元格合并）</p>
+                <ul>
+                    <li>一级结构ID、一级结构名称</li>
+                    <li>二级结构ID、二级结构名称</li>
+                    <li>三级结构ID、三级结构名称</li>
+                    <li>四级结构ID、四级结构名称</li>
+                    <li>门诊住院、院区名</li>
+                </ul>
+            </div>
+
+            <h4>4. 药费及人次汇总表</h4>
+            <div class="format-example">
+                <p><strong>数据来源</strong>：药品使用信息按照患者名进行统计数据</p>
+                <p><strong>内容</strong>：按科室汇总的费用和人次统计</p>
+            </div>
+        </div>
+
+        <div id="version-features">
+            <h2><span class="emoji">🆕</span>中联软件版本特性</h2>
+            
+            <h3>核心优势</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>中联软件适配</h4>
+                    <p>专门针对中联软件数据格式进行优化</p>
+                </div>
+                <div class="feature-card">
+                    <h4>智能表头匹配</h4>
+                    <p>强大的自动表头检测和列名映射功能，完美适配中联软件导出格式</p>
+                </div>
+                <div class="feature-card">
+                    <h4>前置数据聚合</h4>
+                    <p>自动聚合中联软件药品使用明细数据</p>
+                </div>
+                <div class="feature-card">
+                    <h4>动态科室识别</h4>
+                    <p>采用先进的正则表达式和模式匹配算法，适配中联软件科室命名规则</p>
+                </div>
+                <div class="feature-card">
+                    <h4>智能医保编码匹配</h4>
+                    <p>多层智能识别算法，提高中联软件数据匹配准确率</p>
+                </div>
+                <div class="feature-card">
+                    <h4>四级结构支持</h4>
+                    <p>完整支持中联软件复杂的医院科室层级结构</p>
+                </div>
+                <div class="feature-card">
+                    <h4>版本兼容性</h4>
+                    <p>支持通平台1.4、1.5和1.6版本的差异化处理</p>
+                </div>
+            </div>
+
+            <h3>界面优化</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Logo集成显示</h4>
+                    <p>120x120像素高清logo，提升专业形象</p>
+                </div>
+                <div class="feature-card">
+                    <h4>颜色标识系统</h4>
+                    <p>新增科室绿色高亮，一目了然</p>
+                </div>
+                <div class="feature-card">
+                    <h4>实时日志反馈</h4>
+                    <p>详细的处理过程和错误信息显示</p>
+                </div>
+                <div class="feature-card">
+                    <h4>进度可视化</h4>
+                    <p>直观的进度条显示处理状态</p>
+                </div>
+            </div>
+
+            <h3>处理优化</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>多层智能检测</h4>
+                    <p>药品目录和药品使用信息的双重智能表头检测</p>
+                </div>
+                <div class="feature-card">
+                    <h4>智能列映射</h4>
+                    <p>增强的Excel列名识别和自动映射算法，专门适配中联软件</p>
+                </div>
+                <div class="feature-card">
+                    <h4>容错处理</h4>
+                    <p>支持列名变体、特殊字符、数据类型自动转换</p>
+                </div>
+                <div class="feature-card">
+                    <h4>格式保护</h4>
+                    <p>确保科室ID和编码格式的正确性</p>
+                </div>
+                <div class="feature-card">
+                    <h4>错误处理</h4>
+                    <p>完善的异常处理和详细日志记录</p>
+                </div>
+                <div class="feature-card">
+                    <h4>性能优化</h4>
+                    <p>优化大数据量处理性能</p>
+                </div>
+            </div>
+
+            <h3>自动化功能</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>临时文件清理</h4>
+                    <p>自动清理处理过程中的临时文件</p>
+                </div>
+                <div class="feature-card">
+                    <h4>科室结构维护</h4>
+                    <p>动态维护科室结构总表</p>
+                </div>
+                <div class="feature-card">
+                    <h4>颜色标识管理</h4>
+                    <p>自动跟踪和标识新增科室</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="workflow">
+            <h2><span class="emoji">📋</span>中联软件数据处理流程</h2>
+            
+            <h3>1. 数据预处理阶段</h3>
+            <ol class="step-list">
+                <li><strong>文件检测</strong>：自动检测中联软件导出的Excel文件格式</li>
+                <li><strong>表头识别</strong>：智能识别药品使用信息文件的表头行位置</li>
+                <li><strong>列名映射</strong>：自动映射中联软件特有的列名格式</li>
+                <li><strong>数据清洗</strong>：处理特殊字符和格式问题</li>
+            </ol>
+
+            <h3>2. 数据聚合阶段</h3>
+            <ol class="step-list">
+                <li><strong>明细数据读取</strong>：读取包含所有科室的药品使用明细数据</li>
+                <li><strong>科室药品聚合</strong>：按接收科室+药品名称进行数据聚合</li>
+                <li><strong>金额数量汇总</strong>：对实发数量和金额进行求和处理</li>
+                <li><strong>信息保留</strong>：保留科室编码、药品id、规格等重要字段的第一个值</li>
+            </ol>
+
+            <h3>3. 科室结构识别阶段</h3>
+            <ol class="step-list">
+                <li><strong>四级结构识别</strong>：识别中联软件复杂的科室层级结构</li>
+                <li><strong>科室分类</strong>：区分混合科室、门诊科室、住院科室</li>
+                <li><strong>ID分配</strong>：为各级科室分配唯一的ID编码</li>
+                <li><strong>结构维护</strong>：更新和维护科室结构总表</li>
+            </ol>
+
+            <h3>4. 医保编码匹配阶段</h3>
+            <ol class="step-list">
+                <li><strong>药品目录解析</strong>：解析中联软件药品目录文件</li>
+                <li><strong>编码映射</strong>：建立药品编码到医保编码的映射关系</li>
+                <li><strong>匹配处理</strong>：为药品使用信息添加医保编码</li>
+                <li><strong>数据过滤</strong>：过滤无法匹配的数据记录</li>
+            </ol>
+
+            <h3>5. 输出生成阶段</h3>
+            <ol class="step-list">
+                <li><strong>四表生成</strong>：生成医院药品信息、药品使用信息、科室信息、药费及人次汇总四个工作表</li>
+                <li><strong>格式设置</strong>：设置Excel格式和样式</li>
+                <li><strong>数据验证</strong>：验证输出数据的完整性和准确性</li>
+                <li><strong>文件保存</strong>：保存最终的标准化Excel文件</li>
+            </ol>
+        </div>
+
+        <hr style="margin: 40px 0; border: none; border-top: 2px solid #eee;">
+        
+        <div style="text-align: center; color: #666; font-size: 14px;">
+            <p><strong>版本</strong>: 中联软件适配版</p>
+            <p><strong>更新时间</strong>: 2025年</p>
+            <p><strong>开发说明</strong>: 这个工具专门针对中联软件的数据格式和业务需求进行了深度优化，基于智能表头匹配、前置数据聚合和动态科室结构识别的医疗数据处理系统。系统的核心优势在于对中联软件导出数据格式的完美适配，能够自动识别和处理各种格式变化，大幅降低了用户的数据准备工作量。特别适合使用中联软件的医疗机构进行数据整理和上报工作。中联软件版本通过智能匹配、前置聚合处理和先进的算法技术，确保了数据处理的准确性和灵活性。</p>
+        </div>
+    </div>
+</body>
+</html>

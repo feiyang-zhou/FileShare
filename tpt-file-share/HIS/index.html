@@ -139,23 +139,101 @@
             margin-top: 5px;
         }
 
-        /* 下载列表 */
-        .download-list {
-            display: grid;
-            gap: 20px;
+        /* 分类模块样式 */
+        .category-section {
+            margin-bottom: 30px;
         }
         
+        .category-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        
+        .category-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+        }
+        
+        .category-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .category-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+        }
+        
+        .category-icon {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-icon.expanded {
+            transform: rotate(180deg);
+        }
+        
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            background-color: rgba(248, 252, 248, 0.5);
+            border-radius: 0 0 12px 12px;
+            padding: 0 20px;
+            border: 2px solid #e8f5e9;
+            border-top: none;
+            opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+        }
+        
+        .category-content.expanded {
+            max-height: 1500px;
+            padding: 20px;
+            opacity: 1;
+        }
+        
+        /* 子分类样式 */
+        .subcategory {
+            margin-bottom: 25px;
+        }
+        
+        .subcategory-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c6e31;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #4CAF50;
+            display: inline-block;
+        }
+        
+        .subcategory-items {
+            display: grid;
+            gap: 15px;
+        }
+        
+        /* 文件项样式 */
         .file-item {
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 3px solid #4CAF50;
+            border-left: 4px solid #4CAF50;
         }
         
         .file-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
         }
         
@@ -191,6 +269,36 @@
         }
         
         .download-btn svg {
+            margin-right: 8px;
+        }
+
+        /* 按钮组样式 */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* 文档按钮样式 */
+        .doc-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .doc-btn:hover {
+            background-color: #1976D2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .doc-btn svg {
             margin-right: 8px;
         }
 
@@ -269,149 +377,303 @@
             </div>
         </section>
 
+        <!-- 更新日志模块 -->
+        <section class="changelog-section">
+            <div class="category-section">
+                <div class="category-header" onclick="toggleCategory('changelog')">
+                    <div>
+                        <h2 class="category-title">📋 更新日志</h2>
+                        <p class="category-subtitle">查看最新版本功能更新和改进内容</p>
+                    </div>
+                    <span class="category-icon" id="changelog-icon">▼</span>
+                </div>
+                <div class="category-content" id="changelog-content">
+                    <div class="subcategory">
+                        <h3 class="subcategory-title">最新更新 - 2025年11月</h3>
+                        <div class="subcategory-items">
+                            <div class="file-item">
+                                <div class="file-name">🆕 版本 1.6 支持</div>
+                                <div class="file-desc">新增支持通平台1.6版本，医院药品信息sheet不在需要规格转换系数和规格两列。</div>
+                            </div>
+                            
+                            <div class="file-item">
+                                <div class="file-name">📅 时间格式增强</div>
+                                <div class="file-desc">兼容多种时间输入格式，支持：
+                                    <ul style="margin: 10px 0; padding-left: 20px;">
+                                        <li>标准格式：2025年9月</li>
+                                        <li>点分格式：2025.9</li>
+                                        <li>横线格式：2025-9</li>
+                                        <li>其他常见时间表示方式</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="file-item">
+                                <div class="file-name">🔄 中联版本重构</div>
+                                <div class="file-desc">重新编写中联版本核心算法：
+                                    <ul style="margin: 10px 0; padding-left: 20px;">
+                                        <li>去除美康数据依赖</li>
+                                        <li>完全基于HIS数据计算诊疗人次</li>
+                                        <li>提高数据准确性和处理效率</li>
+                                        <li>优化算法逻辑，减少计算时间</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </section>
+
         <section class="download-list">
-            <!-- 第一个文件 -->
-            <div class="file-item">
-                <div class="file-name">通平台数据处理工具_中联软件.exe</div>
-                <div class="file-desc">适配中联HIS系统，支持自动化处理药品使用信息数据</div>
-                <a 
-                    href="downloads/通平台数据处理工具_中联软件.exe" 
-                    class="download-btn" 
-                    download
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    下载中联软件版
-                </a>
+            <!-- 美康系统分类 -->
+            <div class="category-section">
+                <div class="category-header" onclick="toggleCategory('meikang')">
+                    <div>
+                        <h2 class="category-title">美康系统</h2>
+                        <p class="category-subtitle">适用于美康医疗信息系统的数据处理工具</p>
+                    </div>
+                    <span class="category-icon" id="meikang-icon">▼</span>
+                </div>
+                <div class="category-content" id="meikang-content">
+                    <!-- 通用版本 -->
+                    <div class="subcategory">
+                        <h3 class="subcategory-title">通用版本</h3>
+                        <div class="subcategory-items">
+                            <div class="file-item">
+                                <div class="file-name">通平台数据处理工具_美康.exe</div>
+                                <div class="file-desc">美康通用版本，适用于标准美康HIS系统</div>
+                                <div class="button-group">
+                                    <a href="downloads/通平台数据处理工具_美康.exe" class="download-btn" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        下载美康通用版
+                                    </a>
+                                    <a href="docs/美康版本说明.html" class="doc-btn" target="_blank">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        查看文档
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 个性化版本 -->
+                    <div class="subcategory">
+                        <h3 class="subcategory-title">个性化版本</h3>
+                        <div class="subcategory-items">
+                            <div class="file-item">
+                                <div class="file-name">通平台数据处理工具_陈莹.exe</div>
+                                <div class="file-desc">美康-陈莹版本，定制化功能适配</div>
+                                <div class="button-group">
+                                    <a href="downloads/通平台数据处理工具_陈莹.exe" class="download-btn" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        下载美康-陈莹版本
+                                    </a>
+                                    <a href="docs/美康陈莹版本说明.html" class="doc-btn" target="_blank">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        查看文档
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="file-item">
+                                <div class="file-name">通平台数据处理工具_沙其.exe</div>
+                                <div class="file-desc">美康-沙其版本，专门定制功能</div>
+                                <div class="button-group">
+                                    <a href="downloads/通平台数据处理工具_沙其.exe" class="download-btn" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        下载美康-沙其版本
+                                    </a>
+                                    <a href="docs/美康沙其版本说明.html" class="doc-btn" target="_blank">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        查看文档
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- 第二个文件 -->
-            <div class="file-item">
-                <div class="file-name">通平台数据处理工具_东华.exe</div>
-                <div class="file-desc">适配东华HIS系统，支持分别统计门诊、住院药品使用数据</div>
-                <a 
-                    href="downloads/通平台数据处理工具_东华.exe" 
-                    class="download-btn" 
-                    download
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    下载东华软件版
-                </a>
-            </div>
+            <!-- HIS系统分类 -->
+            <div class="category-section">
+                <div class="category-header" onclick="toggleCategory('his')">
+                    <div>
+                        <h2 class="category-title">HIS系统</h2>
+                        <p class="category-subtitle">适用于各种主流HIS医疗信息系统</p>
+                    </div>
+                    <span class="category-icon" id="his-icon">▼</span>
+                </div>
+                <div class="category-content" id="his-content">
+                    <!-- 标准版本 -->
+                    <div class="subcategory">
+                        <h3 class="subcategory-title">标准版本</h3>
+                        <div class="subcategory-items">
+                            <div class="file-item">
+                                <div class="file-name">通平台数据处理工具_东软.exe</div>
+                                <div class="file-desc">适配东软HIS系统，仅需提供药品使用信息</div>
+                                <div class="button-group">
+                                    <a href="downloads/通平台数据处理工具_东软.exe" class="download-btn" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        下载东软软件版
+                                    </a>
+                                    <a href="docs/东软版本说明.html" class="doc-btn" target="_blank">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        查看文档
+                                    </a>
+                                </div>
+                            </div>
 
-            <!-- 第三个文件 -->
-            <div class="file-item">
-                <div class="file-name">通平台数据处理工具_东华_张昕版本.exe</div>
-                <div class="file-desc">硬编码科室架构，用于长治市人民医院</div>
-                <a 
-                    href="downloads/通平台数据处理工具_东华_张昕版本.exe" 
-                    class="download-btn" 
-                    download
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    下载东华-张昕版本
-                </a>
-            </div>
+                            <div class="file-item">
+                                <div class="file-name">通平台数据处理工具_东华.exe</div>
+                                <div class="file-desc">适配东华HIS系统，支持分别统计门诊、住院药品使用数据</div>
+                                <div class="button-group">
+                                    <a href="downloads/通平台数据处理工具_东华.exe" class="download-btn" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        下载东华软件版
+                                    </a>
+                                    <a href="docs/东华版本说明.html" class="doc-btn" target="_blank">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        查看文档
+                                    </a>
+                                </div>
+                            </div>
 
-            <!-- 第四个文件 -->
-            <div class="file-item">
-                <div class="file-name">通平台数据处理工具_东软.exe</div>
-                <div class="file-desc">适配东软HIS系统，仅需提供药品使用信息</div>
-                <a 
-                    href="downloads/通平台数据处理工具_东软.exe" 
-                    class="download-btn" 
-                    download
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    下载东软软件版
-                </a>
-            </div>
+                            <div class="file-item">
+                                <div class="file-name">通平台数据处理工具_中联软件.exe</div>
+                                <div class="file-desc">适配中联HIS系统，支持自动化处理药品使用信息数据</div>
+                                <div class="button-group">
+                                    <a href="downloads/通平台数据处理工具_中联软件.exe" class="download-btn" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        下载中联软件版
+                                    </a>
+                                    <a href="docs/中联软件版本说明.html" class="doc-btn" target="_blank">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        查看文档
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- 第五个文件 -->
-            <div class="file-item">
-                <div class="file-name">通平台数据处理工具_东软_王琳.exe</div>
-                <div class="file-desc">东软-王琳版本，针对盛京医院需求定制</div>
-                <a 
-                    href="downloads/通平台数据处理工具_东软_王琳.exe" 
-                    class="download-btn" 
-                    download
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    下载东软-王琳版本
-                </a>
-            </div>
+                    <!-- 个性化版本 -->
+                    <div class="subcategory">
+                        <h3 class="subcategory-title">个性化版本</h3>
+                        <div class="subcategory-items">
+                            <div class="file-item">
+                                <div class="file-name">通平台数据处理工具_东华_张昕版本.exe</div>
+                                <div class="file-desc">硬编码科室架构，用于长治市人民医院</div>
+                                <div class="button-group">
+                                    <a href="downloads/通平台数据处理工具_东华_张昕版本.exe" class="download-btn" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        下载东华-张昕版本
+                                    </a>
+                                    <a href="docs/东华张昕版本说明.html" class="doc-btn" target="_blank">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        查看文档
+                                    </a>
+                                </div>
+                            </div>
 
-            <!-- 第六个文件 -->
-            <div class="file-item">
-                <div class="file-name">通平台数据处理工具_美康.exe</div>
-                <div class="file-desc">美康通用版本</div>
-                <a 
-                    href="downloads/通平台数据处理工具_美康.exe" 
-                    class="download-btn" 
-                    download
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    下载美康通用版
-                </a>
-            </div>
-
-            <!-- 第七个文件 -->
-            <div class="file-item">
-                <div class="file-name">通平台数据处理工具_陈莹.exe</div>
-                <div class="file-desc">美康-陈莹版本</div>
-                <a 
-                    href="downloads/新医疗数据处理工具_陈莹.exe" 
-                    class="download-btn" 
-                    download
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    下载美康-陈莹版本
-                </a>
-            </div>
-
-            <!-- 第八个文件 -->
-            <div class="file-item">
-                <div class="file-name">通平台数据处理工具_沙其.exe</div>
-                <div class="file-desc">美康-沙其版本</div>
-                <a 
-                    href="downloads/通平台数据处理工具_沙其.exe" 
-                    class="download-btn" 
-                    download
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    下载美康-沙其版本
-                </a>
+                            <div class="file-item">
+                                <div class="file-name">通平台数据处理工具_东软_王琳.exe</div>
+                                <div class="file-desc">东软-王琳版本，针对盛京医院需求定制</div>
+                                <div class="button-group">
+                                    <a href="downloads/通平台数据处理工具_东软_王琳.exe" class="download-btn" download>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        下载东软-王琳版本
+                                    </a>
+                                    <a href="docs/东软王琳版本说明.html" class="doc-btn" target="_blank">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        查看文档
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -419,5 +681,28 @@
             <p>© 2025 通平台数据处理工具 | 定期更新，建议使用最新版本</p>
         </footer>
     </div>
+
+    <script>
+        function toggleCategory(categoryId) {
+            const content = document.getElementById(categoryId + '-content');
+            const icon = document.getElementById(categoryId + '-icon');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.classList.remove('expanded');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('expanded');
+                icon.textContent = '▲';
+            }
+        }
+
+        // 页面加载完成后默认展开美康分类（可选）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 可以在这里设置默认展开的分类
+            // toggleCategory('meikang');
+        });
+    </script>
 </body>
 </html>
