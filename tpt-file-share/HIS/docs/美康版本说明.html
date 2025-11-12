@@ -458,22 +458,166 @@ whitelist_depts = [
                     <tbody>
                         <tr><td>排名</td><td>药品排名信息</td><td>15列/16列</td></tr>
                         <tr><td>科室名称</td><td>科室完整名称</td><td>15列/16列</td></tr>
-                        <tr><td>科室药品总金额</td><td>科室药品总费用</td><td>15列/16列</td></tr>
-                        <tr><td>药品排名</td><td>具体药品排名</td><td>15列/16列</td></tr>
+                        <tr><td>科室药品总金额(元)</td><td>科室药品总费用</td><td>15列/16列</td></tr>
+                        <tr><td>排名</td><td>具体药品排名</td><td>15列/16列</td></tr>
                         <tr><td>药品名称</td><td>药品完整名称</td><td>15列/16列</td></tr>
                         <tr><td>药品编码</td><td>院内药品唯一标识码</td><td>15列/16列</td></tr>
-                        <tr><td>医保编码</td><td>国家医保统一编码</td><td>15列/16列</td></tr>
-                        <tr><td>药品通用名</td><td>药品通用名称</td><td>15列/16列</td></tr>
+                        <tr><td>医保贯标码</td><td>国家医保统一编码</td><td>15列/16列</td></tr>
+                        <tr><td>药品通用名称</td><td>药品通用名称</td><td>15列/16列</td></tr>
                         <tr><td>剂型</td><td>药品剂型信息</td><td>15列/16列</td></tr>
                         <tr><td>规格</td><td>药品规格描述</td><td>15列/16列</td></tr>
                         <tr><td>厂家</td><td>生产厂家信息</td><td>15列/16列</td></tr>
-                        <tr><td>使用量DDDs</td><td>DDDs使用量数据</td><td>15列/16列</td></tr>
+                        <tr><td>使用量(DDDs)</td><td>DDDs使用量数据</td><td>15列/16列</td></tr>
                         <tr><td>数量</td><td>使用数量（支持"114+-120"等格式）</td><td>15列/16列</td></tr>
                         <tr><td>计价单位</td><td>计价单位</td><td>15列/16列</td></tr>
                         <tr><td>单价</td><td>药品单价</td><td>仅16列格式包含</td></tr>
-                        <tr><td>总金额</td><td>使用总金额</td><td>15列/16列</td></tr>
+                        <tr><td>总金额(元)</td><td>使用总金额</td><td>15列/16列</td></tr>
                     </tbody>
                 </table>
+            </div>
+
+            
+            <h4>DDS表医保贯标码处理逻辑</h4>
+            <div class="special-feature">
+                <h3>医保贯标码智能识别机制</h3>
+                <p>当输入的DDS表包含医保贯标码列且该列有数据时，系统将启用特殊的处理模式：</p>
+
+                <h4>1. 医保贯标码列检测</h4>
+                <p>脚本会自动检测DDS表中是否存在以下列名：</p>
+                <ul>
+                    <li><code>医保贯标码</code></li>
+                    <li><code>医保编码</code></li>
+                    <li><code>统一编码</code></li>
+                    <li><code>国家编码</code></li>
+                </ul>
+
+                <h4>2. 数据有效性验证</h4>
+                <ul>
+                    <li>检查非空值数量</li>
+                    <li>排除空字符串和'nan'值</li>
+                    <li>至少需要1条有效数据才启用新逻辑</li>
+                </ul>
+
+                <h4>3. DDS表模式处理特点</h4>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>公立医院对应关系表处理</h4>
+                        <ul>
+                            <li><strong>状态</strong>：完全忽略</li>
+                            <li><strong>行为</strong>：即使用户传入了公立医院对应关系表文件，系统也不会读取或使用</li>
+                            <li><strong>占位符机制</strong>：用户可以传入任何表文件作为占位符，包括DDS表本身</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>格式校验</h4>
+                        <ul>
+                            <li><strong>状态</strong>：跳过所有格式校验</li>
+                            <li><strong>行为</strong>：任何Excel表格都能通过处理，不进行列名、数据格式等校验</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>4. 数据映射规则</h4>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>目标表</th>
+                                <th>目标列</th>
+                                <th>数据来源</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="6">医院药品信息表</td>
+                                <td>医保编码</td>
+                                <td>DDS表的医保贯标码列</td>
+                                <td>直接映射</td>
+                            </tr>
+                            <tr>
+                                <td>医院药品ID</td>
+                                <td>DDS表的药品编码列</td>
+                                <td>确保字符串格式，去除.0后缀</td>
+                            </tr>
+                            <tr>
+                                <td>药品名称</td>
+                                <td>DDS表的药品名称列</td>
+                                <td>直接映射</td>
+                            </tr>
+                            <tr>
+                                <td>规格或规格x包装</td>
+                                <td>DDS表的规格列</td>
+                                <td>直接映射</td>
+                            </tr>
+                            <tr>
+                                <td>规格转换系数</td>
+                                <td>默认值：1</td>
+                                <td>固定值</td>
+                            </tr>
+                            <tr>
+                                <td>成本价格(元)</td>
+                                <td>默认值：空</td>
+                                <td>固定值</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">药品使用信息表</td>
+                                <td>医保编码</td>
+                                <td>DDS表的医保贯标码列</td>
+                                <td>直接映射</td>
+                            </tr>
+                            <tr>
+                                <td>医院药品ID</td>
+                                <td>DDS表的药品编码列</td>
+                                <td>确保字符串格式，去除.0后缀</td>
+                            </tr>
+                            <tr>
+                                <td>使用量</td>
+                                <td>DDS表的数量列</td>
+                                <td>直接映射</td>
+                            </tr>
+                            <tr>
+                                <td>使用金额</td>
+                                <td>DDS表的总金额(元)列</td>
+                                <td>直接映射</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>5. 处理逻辑分支</h4>
+                <div class="code-block">
+if DDS表包含医保贯标码列 AND 该列有有效数据:
+    启用DDS表模式
+    - 忽略公立医院对应关系表
+    - 跳过格式校验
+    - 直接数据映射
+else:
+    使用传统处理模式
+    - 读取公立医院对应关系表
+    - 进行格式校验
+    - 通过药品编码进行匹配映射
+                </div>
+
+                <h4>6. 使用场景对比</h4>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>场景1：DDS表包含医保贯标码</h4>
+                        <ul>
+                            <li><strong>输入</strong>：包含医保贯标码列的DDS表 + 任意占位符表（可选）</li>
+                            <li><strong>处理</strong>：DDS表模式，直接数据映射</li>
+                            <li><strong>输出</strong>：医保编码来自医保贯标码列，医院药品ID来自药品编码列</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>场景2：DDS表不包含医保贯标码</h4>
+                        <ul>
+                            <li><strong>输入</strong>：普通DDS表 + 公立医院对应关系表（必需）</li>
+                            <li><strong>处理</strong>：传统模式，药品编码匹配</li>
+                            <li><strong>输出</strong>：医保编码通过药品编码匹配获得</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <h3>公立医疗机构药品目录格式</h3>
