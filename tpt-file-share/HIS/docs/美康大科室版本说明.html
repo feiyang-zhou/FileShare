@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大科室版本各个表表头说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .intro p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        .table-section {
+            margin-bottom: 50px;
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .table-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .table-desc {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .image-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .table-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .table-image:hover {
+            transform: scale(1.02);
+        }
+        
+        footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            margin-top: 10px;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .table-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>大科室版本各个表表头说明</h1>
+            <p class="subtitle">通平台数据处理工具 - 美康大科室版本</p>
+        </header>
+        
+        <div class="content">
+            <div class="intro">
+                <p>本文档详细说明了美康大科室版本中各个表格的表头结构和字段含义。以下图片展示了五个核心表格的表头信息，帮助您快速了解数据结构和使用方法。</p>
+            </div>
+            
+            <!-- 表格1 -->
+            <div class="table-section">
+                <div class="table-header">
+                    <h2 class="table-title">1. 大科室药品使用金额及使用量DDDs排名表</h2>
+                    <p class="table-desc">展示各大科室的药品使用金额及DDDs排名统计信息</p>
+                </div>
+                <div class="image-container">
+                    <img src="../images/major/大科室药品使用金额及使用量DDDs排名表.png" alt="大科室药品使用金额及使用量DDDs排名表" class="table-image">
+                </div>
+            </div>
+            
+            <!-- 表格2 -->
+            <div class="table-section">
+                <div class="table-header">
+                    <h2 class="table-title">2. 门急诊病人统计表</h2>
+                    <p class="table-desc">门诊和急诊患者的统计数据及相关指标</p>
+                </div>
+                <div class="image-container">
+                    <img src="../images/major/门急诊病人统计表.png" alt="门急诊病人统计表" class="table-image">
+                </div>
+            </div>
+            
+            <!-- 表格3 -->
+            <div class="table-section">
+                <div class="table-header">
+                    <h2 class="table-title">3. 住出院病人统计表</h2>
+                    <p class="table-desc">住院和出院患者的统计数据及相关指标</p>
+                </div>
+                <div class="image-container">
+                    <img src="../images/major/住出院病人统计表.png" alt="住出院病人统计表" class="table-image">
+                </div>
+            </div>
+            
+            <!-- 表格4 -->
+            <div class="table-section">
+                <div class="table-header">
+                    <h2 class="table-title">4. 住院患者静脉输液使用监测指标调查表</h2>
+                    <p class="table-desc">住院患者静脉输液使用情况的监测指标统计</p>
+                </div>
+                <div class="image-container">
+                    <img src="../images/major/住院患者静脉输液使用监测指标调查表.png" alt="住院患者静脉输液使用监测指标调查表" class="table-image">
+                </div>
+            </div>
+            
+        </div>
+        
+        <footer>
+            <p>© 2025 通平台数据处理工具 - 美康大科室版本</p>
+            <p style="margin-top: 10px; color: #999; font-size: 14px;">如有疑问，请联系技术支持</p>
+            <a href="../index.html" class="back-btn">返回下载中心</a>
+        </footer>
+    </div>
+</body>
+</html>
